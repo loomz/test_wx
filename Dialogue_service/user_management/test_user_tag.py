@@ -18,7 +18,6 @@ def test_api_user_tags_create(tag_name,errcode, token):
     print('\n tags_data=%s' % tags_data)
     tags_response = comm.post(url_tags_create, body=tags_data)
     print('\n http状态码=%s , response.json=%s' % (tags_response.status_code, tags_response.json()))
-
     if errcode == 0:
         assert tags_response.status_code == 200 and "tag" in tags_response.json()
     else:
@@ -59,7 +58,6 @@ def test_api_user_tags_delete(token,tag_id):
     }
     delete_response = comm.post(url_tags_delete, body=tags_data)
     print('\n http状态码=%s, response.json=%s ' % (delete_response.status_code, delete_response.json()))
-    #assert delete_response.status_code == 200 and delete_response.json()['errcode'] == 0
     errcode = delete_response.json()['errcode']
     if errcode == 0:
         assert delete_response.status_code == 200 and delete_response.json()['errcode'] == errcode
