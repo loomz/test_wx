@@ -60,6 +60,6 @@ def test_delete(token,tag_id):
     print('\n http状态码=%s, response.json=%s ' % (delete_response.status_code, delete_response.json()))
     errcode = delete_response.json()['errcode']
     if errcode == 0:
-        assert delete_response.status_code == 200 and delete_response.json()['errcode'] == errcode
+        assert delete_response.status_code == 200 and delete_response.json()
     else:
         assert delete_response.status_code == 200 and delete_response.json()['errcode'] == errcode
