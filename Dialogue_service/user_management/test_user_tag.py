@@ -8,8 +8,8 @@ comm = CommonHttp('https://api.weixin.qq.com/cgi-bin')
 
 
 # 用户管理 /用户标签管理->创建标签
-@pytest.mark.parametrize('tag_name,errcode', CommonReadFile().get_data_json('test_api_user_tags_create.json'))
-def test_api_user_tags_create(tag_name,errcode, token):
+@pytest.mark.parametrize('tag_name,errcode', CommonReadFile().get_data_json('test_create.json'))
+def test_create(tag_name,errcode, token):
     url_tags_create ='/tags/create?access_token=%s' % token
     print('\n tag_name=%s' % tag_name)
     tags_data = {
@@ -26,7 +26,7 @@ def test_api_user_tags_create(tag_name,errcode, token):
 
 
 #  获取公众号已创建的标签
-def test_api_user_tag_select(token):
+def test_select(token):
     url_tag_select = '/tags/get?access_token=%s' % token
     tags_select_response = comm.get(url_tag_select)
     # 打印出来的json格式的中文数据显示异常 ,json.dumps(tags_select_response.json(), ensure_ascii=False)
@@ -36,8 +36,8 @@ def test_api_user_tag_select(token):
 
 
 # 编辑标签
-@pytest.mark.parametrize('tag_id,tag_name', CommonReadFile().get_data_json('test_api_user_tags_update.json'))
-def test_api_user_tags_update(token, tag_id, tag_name):
+@pytest.mark.parametrize('tag_id,tag_name', CommonReadFile().get_data_json('test_update.json'))
+def test_update(token, tag_id, tag_name):
     url_tags_update ='/tags/update?access_token=%s' % token
     tags_data = {
             "tag": {"id": tag_id, "name": tag_name}
@@ -50,8 +50,8 @@ def test_api_user_tags_update(token, tag_id, tag_name):
     else:
         assert update_response.status_code == 200 and update_response.json()['errcode'] == errcode
 # 删除标签
-@pytest.mark.parametrize('tag_id',CommonReadFile().get_data_json('test_api_user_tags_delete.json'))
-def test_api_user_tags_delete(token,tag_id):
+@pytest.mark.parametrize('tag_id', CommonReadFile().get_data_json('test_delete.json'))
+def test_delete(token,tag_id):
     url_tags_delete ='/tags/delete?access_token=%s' % token
     tags_data = {
         "tag": {"id": tag_id}
