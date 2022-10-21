@@ -15,13 +15,13 @@ import pytest
 from common.common_read_file import CommonReadFile
 from common.common_requests import CommonHttp
 
-comm = CommonHttp('https://api.weixin.qq.com/cgi-bin')
+
 
 # 测试获取微信服务器IP地址方法
-def test_api_domain_ip(token):
+def test_api_domain_ip(token , http):
     token_id = token
     ip_url ='/get_api_domain_ip?access_token=%s' % token_id
-    response_ip = comm.get(ip_url)
+    response_ip = http.get(ip_url)
     print('\n http状态码=%s, response.json=%s ' % (response_ip.status_code, response_ip.json()))
     assert response_ip.status_code == 200
 
