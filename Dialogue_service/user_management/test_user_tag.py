@@ -36,30 +36,30 @@ def test_select(token):
 
 
 # 编辑标签
-@pytest.mark.parametrize('tag_id,tag_name', CommonReadFile().get_data_json('test_update.json'))
-def test_update(token, tag_id, tag_name):
+@pytest.mark.parametrize('tag_id,tag_name,tag_errcode', CommonReadFile().get_data_json('test_update.json'))
+def test_update(token, tag_id, tag_name,tag_errcode):
     url_tags_update ='/tags/update?access_token=%s' % token
     tags_data = {
             "tag": {"id": tag_id, "name": tag_name}
     }
     update_response = comm.post(url_tags_update, body=tags_data)
     print('\n http状态码=%s, response.json=%s ' % (update_response.status_code, update_response.json()))
-    errcode = update_response.json()['errcode']
-    if errcode == 0:
-        assert update_response.status_code == 200 and update_response.json()['errcode'] == errcode
+    if tag_errcode == 0:
+        assert update_response.status_code == 200 and update_response.json()
     else:
-        assert update_response.status_code == 200 and update_response.json()['errcode'] == errcode
+        assert update_response.status_code == 200 and update_response.json()['errcode'] == tag_errcode
+
+
 # 删除标签
-@pytest.mark.parametrize('tag_id', CommonReadFile().get_data_json('test_delete.json'))
-def test_delete(token,tag_id):
+@pytest.mark.parametrize('tag_id,tag_errcode', CommonReadFile().get_data_json('test_delete.json'))
+def test_delete(token, tag_id,tag_errcode):
     url_tags_delete ='/tags/delete?access_token=%s' % token
     tags_data = {
         "tag": {"id": tag_id}
     }
     delete_response = comm.post(url_tags_delete, body=tags_data)
     print('\n http状态码=%s, response.json=%s ' % (delete_response.status_code, delete_response.json()))
-    errcode = delete_response.json()['errcode']
-    if errcode == 0:
+    if tag_errcode == 0:
         assert delete_response.status_code == 200 and delete_response.json()
     else:
-        assert delete_response.status_code == 200 and delete_response.json()['errcode'] == errcode
+        assert delete_response.status_code == 200 and delete_response.json()['errcode'] == tag_errcode
