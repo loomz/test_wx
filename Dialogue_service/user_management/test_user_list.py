@@ -3,8 +3,7 @@ from common.common_read_file import CommonReadFile
 from common.common_requests import CommonHttp
 
 
-
-#获取用户列表
+# 获取用户列表
 def test_user_list(token,http):
     #print('access_token=%s' % token_id)
     user_list_select ='/user/get?access_token=%s' % token
