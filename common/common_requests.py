@@ -42,6 +42,7 @@ class CommonHttp(object):
         return response
 
     def __build_url_params(self, url_params):
+        all_url_params = None
         if self.url_params is not None and url_params is None:
             all_url_params = self.url_params
         elif url_params is not None and self.url_params is None:
@@ -57,3 +58,4 @@ class CommonHttp(object):
         all_headers = self.headers if headers is None else {**self.headers, **headers}
         print("all_headers=%s" % all_headers)
         return all_headers
+

@@ -6,7 +6,7 @@ from common.common_requests import CommonHttp
 
 
 # 用户管理 /用户标签管理->创建标签
-@pytest.mark.parametrize('tag_name,expect', CommonReadFile().get_data_json('test_user_tag_create.json'))
+@pytest.mark.parametrize('tag_name,expect', CommonReadFile().get_data_json('dialogue_service/user_management/test_user_tag_create.json'))
 def test_create(tag_name, expect, token, http):
     url_tags_create ='/tags/create?access_token=%s' % token
     print('\n tag_name=%s' % tag_name)
@@ -34,7 +34,7 @@ def test_select(token, http):
 
 
 # 编辑标签
-@pytest.mark.parametrize('tag_id,tag_name,expect', CommonReadFile().get_data_json('test_user_tag_update.json'))
+@pytest.mark.parametrize('tag_id,tag_name,expect', CommonReadFile().get_data_json('dialogue_service/user_management/test_user_tag_update.json'))
 def test_update(token, http, tag_id, tag_name, expect):
     url_tags_update ='/tags/update?access_token=%s' % token
     tags_data = {
@@ -49,7 +49,7 @@ def test_update(token, http, tag_id, tag_name, expect):
 
 
 # 删除标签
-@pytest.mark.parametrize('tag_id,expect', CommonReadFile().get_data_json('test_user_tag_delete.json'))
+@pytest.mark.parametrize('tag_id,expect', CommonReadFile().get_data_json('dialogue_service/user_management/test_user_tag_delete.json'))
 def test_delete(token, http, tag_id,expect):
     url_tags_delete ='/tags/delete?access_token=%s' % token
     tags_data = {

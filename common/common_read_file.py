@@ -25,12 +25,10 @@ class CommonReadFile(object):
         print(lit)
         return lit
 
-
     def get_data_json(self, file_json):
         with open(file_json, encoding="utf-8") as f:
             lit = []
             keys = json.load(f)
-            print("keys len=%s", len(keys))
             for key in keys:
                 if len(key.values()) == 1:
                     lit.extend(key.values())
