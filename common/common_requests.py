@@ -50,12 +50,9 @@ class CommonHttp(object):
         elif self.url_params is not None and url_params is not None:
             all_url_params = {**self.url_params, **url_params}
 
-        print("all_url_params=%s" % all_url_params)
-
         return all_url_params
 
     def __build_headers(self, headers):
         all_headers = self.headers if headers is None else {**self.headers, **headers}
-        print("all_headers=%s" % all_headers)
         return all_headers
 
